@@ -1,10 +1,11 @@
 package main
 
 import (
-	"go-auth/internal/server"
 	"context"
+	"go-auth/internal/server"
 	"log"
 	"net/http"
+	"os"
 	"os/signal"
 	"syscall"
 	"time"
@@ -13,9 +14,11 @@ import (
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("err loading: %v", err)
+	if os.Getenv("APP_ENV") == "development" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatalf("err loading: %v", err)
+		}
 	}
 	s := server.NewServer()
 	srv := &http.Server{
