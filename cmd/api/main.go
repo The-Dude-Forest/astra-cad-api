@@ -22,7 +22,7 @@ func main() {
 	}
 	s := server.NewServer()
 	srv := &http.Server{
-		Addr:         "127.0.0.1:" + s.Port(),
+		Addr:         ":" + s.Port(),
 		Handler:      s.Router(),
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 30 * time.Second,
